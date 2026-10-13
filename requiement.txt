@@ -1,0 +1,48 @@
+
+# AI Meeting Assistant
+# Python 3.12
+
+# Audio / Video
+yt-dlp
+pydub
+ffmpeg-python
+
+# Speech-to-Text
+openai-whisper
+torch
+torchaudio
+
+# Translation
+deep-translator
+
+# LLM - Groq
+langchain
+langchain-core
+langchain-groq
+groq
+
+# RAG Pipeline
+langchain_text_splitters
+langchain_community
+langchain-chroma
+chromadb
+sentence-transformers
+langchain-huggingface
+huggingface-hub
+tiktoken
+torchvision
+
+# Streamlit UI
+streamlit
+streamlit-extras
+watchdog
+
+# PDF & TXT Export
+reportlab
+fpdf2
+
+# Utilities
+python-dotenv
+numpy
+tqdm
+requests
