@@ -3,6 +3,7 @@
 # Python 3.12
 
 # Audio / Video
+yt-dlp[default]
 yt-dlp
 pydub
 ffmpeg-python

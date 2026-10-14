@@ -6,24 +6,54 @@ DOWNLOAD_DIR ='downloads'
 
 os.makedirs(DOWNLOAD_DIR,exist_ok=True)
 
-def download_youtube_audio(url:str)->str:
+# def download_youtube_audio(url:str)->str:
+#     output_path = os.path.join(DOWNLOAD_DIR, "%(title)s.%(ext)s")
+#     ydl_opts = {
+#         'outtmpl': output_path,
+#         'format': 'bestaudio/best',
+#         'postprocessors': [{
+#             'key': 'FFmpegExtractAudio',
+#             'preferredcodec': 'wav',
+#             'preferredquality': '192',
+#         }],
+#         "quiet": True,
+#     }
+
+#     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+#         info = ydl.extract_info(url, download=True)
+#         filename = ydl.prepare_filename(info).replace('.webm','.wav').replace('.m4a','.wav')
+#     return filename
+
+
+def download_youtube_audio(url: str) -> str:
     output_path = os.path.join(DOWNLOAD_DIR, "%(title)s.%(ext)s")
+
     ydl_opts = {
-        'outtmpl': output_path,
-        'format': 'bestaudio/best',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'wav',
-            'preferredquality': '192',
+        "outtmpl": output_path,
+        "format": "bestaudio/best",
+        "postprocessors": [{
+            "key": "FFmpegExtractAudio",
+            "preferredcodec": "wav",
+            "preferredquality": "192",
         }],
+        "extractor_args": {
+            "youtube": {
+                "player_client": ["android_vr", "web"]
+            }
+        },
+        "retries": 5,
+        "fragment_retries": 5,
+        "noplaylist": True,
         "quiet": True,
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=True)
-        filename = ydl.prepare_filename(info).replace('.webm','.wav').replace('.m4a','.wav')
-    return filename
+        filename = os.path.splitext(
+            ydl.prepare_filename(info)
+        )[0] + ".wav"
 
+    return filename
 
 def convert_to_wav(input_path:str)->str:
     """convert any audio file to wav file format using pydub"""
